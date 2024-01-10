@@ -30,6 +30,14 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             console.error('No image data received');
         }
+        if (data.class_probabilities) {
+            console.log("Class probabilities:", data.class_probabilities);
+            for (const [key, value] of Object.entries(data.class_probabilities)) {
+                console.log(`${key}: ${value}%`);
+            }
+        }
+        console.log('Success:', data);
+        clearPreview(); 
     })
     
     .catch(error => {
@@ -38,7 +46,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 }
 
-
+function clearPreview() {
+    var image = document.getElementById('preview-image');
+    image.style.display = "none"; // Hide the image element
+    image.src = ''; // Clear the image source
+  }
 
   // Function to convert dataURL to Blob
   function dataURLtoBlob(dataURL) {

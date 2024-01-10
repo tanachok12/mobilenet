@@ -1,67 +1,83 @@
-/* Place your CSS here */
 .upload-area {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    flex-direction: column; /* Stack children vertically */
+    justify-content: center; /* Center children vertically */
+    align-items: center; /* Center children horizontally */
     padding: 20px;
 }
-
-.upload-box, .capture-box {
-    border: 2px dashed #ccc;
-    padding: 20px;
+.threshold-area {
     text-align: center;
-    margin: 10px;
+    width: 70%; /* Adjust the width as needed */
+    padding: 10px 0; /* Add some padding */
+    margin-bottom: 10px; /* Adjust this to create space above the threshold-area */
+
+}
+.upload-box {
+    border: 2px dashed #ccc;
+    padding: 40px; /* Increase padding to make the box larger */
+    text-align: center;
+    margin-bottom: 20px; /* Add space between the box and the button */
+    width: 70%; /* Make the box wider */
+    max-width: 600px; /* Add a max-width to control the size on larger screens */
+    margin-bottom: 10px; /* Adjust this to create space above the threshold-area */
+
 }
 
 .drag-drop-box {
     cursor: pointer;
+    display: inline-block;
+    width: 100%; /* Make the label fill the .upload-box */
 }
 
 .upload-btn {
     background-color: #4CAF50;
     color: white;
-    padding: 10px 20px;
+    padding: 15px 30px; /* Increase padding to make the button larger */
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 18px; /* Increase font size for better visibility */
+    margin-top: 10px; /* Adjust this to create space below the threshold-area */
+    width: 200px; /* Set a fixed width for the button */
 }
+
+/* The rest of your CSS remains unchanged */
+
 
 /* Add styles for the modal here */
 /* The Modal (background) */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
-  
-  /* Modal Content */
-  .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-  }
-  
-  /* The Close Button */
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}

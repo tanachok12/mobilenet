@@ -5,24 +5,31 @@
     <link rel="stylesheet" type="text/css" href="static/css/style.css">
 </head>
 <body>
-    <h1>Upload or Capture an Image</h1>
+    <h1>Cofee  Model</h1>
     
     <div class="upload-area">
         <form id="upload-form" class="upload-box">
             <input type="file" name="image" id="image-upload" accept="image/*" hidden>
+            <img id="preview-image" src="" alt="Image preview" style="display:none; max-width: 640px; max-height: 480px;">
             <label for="image-upload" class="drag-drop-box">
                 <div class="upload-icon"></div>
                 Drag and drop files or click to select
             </label>
+
         </form>
 
+        <div class="threshold-area">
+            <label for="thresholdRange">Adjust Threshold(ปรับความแม่นยำ): <span id="thresholdValue">0.5</span></label>
+            <input type="range" id="thresholdRange" min="0" max="1" step="0.01" value="0.5">
+        </div>
         <button id="upload-button" class="upload-btn">Upload</button>
-
+        
         <div id="capture-form" class="capture-box">
             <button id="capture">Capture Image</button>
             <video id="video" width="640" height="480" autoplay></video>
             <canvas id="canvas" width="640" height="480" style="display:none;"></canvas>
         </div>
+    </div>
     </div>
 
     <!-- The Modal -->
@@ -34,10 +41,7 @@
 
         </div>
     </div>
-    <div class="threshold-area">
-        <label for="thresholdRange">Adjust Threshold: <span id="thresholdValue">1.0</span></label>
-        <input type="range" id="thresholdRange" min="0" max="1" step="0.01" value="1.0">
-    </div>
+  
     <script>
         document.getElementById('thresholdRange').oninput = function() {
             document.getElementById('thresholdValue').textContent = this.value;
@@ -49,6 +53,14 @@
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('thresholdValue').textContent = document.getElementById('thresholdRange').value;
         });
+        document.getElementById('image-upload').onchange = function(event) {
+            var image = document.getElementById('preview-image');
+            image.style.display = "block"; // Show the image element
+            image.src = URL.createObjectURL(event.target.files[0]);
+            image.onload = function() {
+                URL.revokeObjectURL(image.src) // Free memory
+            }
+        };
     </script>
     <script src="static/script.js"></script>
 </body>
