@@ -2,15 +2,54 @@
 <html>
 <head>
     <title>MobileNet Image Classifier</title>
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
 </head>
 <body>
-    <h1>Upload an Image</h1>
-    <form id="upload-form">
-        <input type="file" name="image" accept="image/*">
-        <button type="submit">Upload</button>
-    </form>
-    <p id="prediction"></p>
+    <h1>Upload or Capture an Image</h1>
+    
+    <div class="upload-area">
+        <form id="upload-form" class="upload-box">
+            <input type="file" name="image" id="image-upload" accept="image/*" hidden>
+            <label for="image-upload" class="drag-drop-box">
+                <div class="upload-icon"></div>
+                Drag and drop files or click to select
+            </label>
+        </form>
 
+        <button id="upload-button" class="upload-btn">Upload</button>
+
+        <div id="capture-form" class="capture-box">
+            <button id="capture">Capture Image</button>
+            <video id="video" width="640" height="480" autoplay></video>
+            <canvas id="canvas" width="640" height="480" style="display:none;"></canvas>
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    <div id="predictionModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="predictionText"></p>
+            <img id="predictionImage" src="" alt="Prediction Image">
+
+        </div>
+    </div>
+    <div class="threshold-area">
+        <label for="thresholdRange">Adjust Threshold: <span id="thresholdValue">1.0</span></label>
+        <input type="range" id="thresholdRange" min="0" max="1" step="0.01" value="1.0">
+    </div>
+    <script>
+        document.getElementById('thresholdRange').oninput = function() {
+            document.getElementById('thresholdValue').textContent = this.value;
+            // Additionally, if you want to log this to the console in real-time:
+            console.log('Current threshold:', this.value);
+        };
+
+        // Set initial value on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('thresholdValue').textContent = document.getElementById('thresholdRange').value;
+        });
+    </script>
     <script src="static/script.js"></script>
 </body>
 </html>

@@ -2,19 +2,89 @@
 <html>
 <head>
     <title>MobileNet Image Classifier</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            color: #333;
+            margin-top: 50px;
+        }
+
+        h1 {
+            color: #4CAF50;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .button-box {
+            width: 200px; /* Width of the button box */
+            height: 100px; /* Height of the button box */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .button-box:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px);
+            background-color: #3e8e41;
+        }
+
+        .button-box form {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .button-text {
+            font-size: 18px;
+            text-align: center;
+            cursor: pointer;
+        }
+          .button-box form {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0; /* Removes default form margin */
+        }
+    </style>
 </head>
 <body>
-    <h1>Upload an Image</h1>
+    <h1>เลือก Model ที่ต้องการ</h1>
 
-    <!-- Button to navigate to carmobilenet.html -->
-    <form action="/carmobilenet">
-        <input type="submit" value="Go to Car Image Classifier" />
-    </form>
-    
-    <form action="/coffeemobilenet">
-        <input type="submit" value="Go to Coffee Image Classifier" />
-    </form>
-    
+    <div class="container">
+        <div class="button-box" onclick="location.href='/carmobilenet';">
+            <div class="button-text">Go to Car Image Classifier</div>
+        </div>
+        
+        <div class="button-box" onclick="location.href='/coffeemobilenet';">
+            <div class="button-text">Go to Coffee Image Classifier</div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to make the entire button-box clickable
+        document.querySelectorAll('.button-box').forEach(box => {
+            box.addEventListener('click', function() {
+                window.location = this.getAttribute('onclick').slice(15, -2); // Extracts URL from onclick attribute
+            });
+        });
+    </script>
    
 </body>
 </html>

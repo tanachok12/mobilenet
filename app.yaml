@@ -1,0 +1,10 @@
+runtime: python39
+
+# การตั้งค่านี้ทำให้แอปสามารถขยายและทำงานได้ดีขึ้นบน App Engine.
+instance_class: F1
+entrypoint: gunicorn -b :$PORT main:app
+
+# ส่วนนี้กำหนด handler ที่ตอบสนองต่อคำขอ HTTP.
+handlers:
+- url: /.*
+  script: auto
