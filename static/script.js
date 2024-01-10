@@ -101,26 +101,32 @@ function clearPreview() {
   });
 
   // Capture button event
-  if (captureButton) {
-    captureButton.addEventListener("click", async () => {
-      const video = document.getElementById("video");
-      const canvas = document.getElementById("canvas");
-      if (!video.srcObject) {
-        const stream = await navigator.mediaDevices.getUserMedia({
-          video: true,
-        });
-        video.srcObject = stream;
-        captureButton.textContent = "Take Picture";
-      } else {
-        canvas.getContext("2d").drawImage(video, 0, 0);
-        video.srcObject.getTracks().forEach((track) => track.stop());
-        video.srcObject = null;
-        captureButton.textContent = "Capture";
-        const dataURL = canvas.toDataURL("image/png");
-        uploadImage(dataURLtoBlob(dataURL));
-      }
-    });
+// Capture button event
+if (captureButton) {
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      captureButton.addEventListener("click", async () => {
+        const video = document.getElementById("video");
+        const canvas = document.getElementById("canvas");
+        if (!video.srcObject) {
+          const stream = await navigator.mediaDevices.getUserMedia({
+            video: true,
+          });
+          video.srcObject = stream;
+          captureButton.textContent = "Take Picture";
+        } else {
+          canvas.getContext("2d").drawImage(video, 0, 0);
+          video.srcObject.getTracks().forEach((track) => track.stop());
+          video.srcObject = null;
+          captureButton.textContent = "Capture";
+          const dataURL = canvas.toDataURL("image/png");
+          uploadImage(dataURLtoBlob(dataURL));
+        }
+      });
+    } else {
+      console.error("getUserMedia ไม่รองรับในเบราว์เซอร์นี้");
+    }
   }
+  
 });
 
 function displayPredictionAndClear(predictionElement, message) {

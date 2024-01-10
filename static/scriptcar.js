@@ -102,7 +102,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   
     // Capture button event
-    if (captureButton) {
+// Capture button event
+if (captureButton) {
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       captureButton.addEventListener("click", async () => {
         const video = document.getElementById("video");
         const canvas = document.getElementById("canvas");
@@ -121,7 +123,11 @@ document.addEventListener("DOMContentLoaded", function () {
           uploadImage(dataURLtoBlob(dataURL));
         }
       });
+    } else {
+      console.error("getUserMedia ไม่รองรับในเบราว์เซอร์นี้");
     }
+  }
+  
   });
   
   function displayPredictionAndClear(predictionElement, message) {
